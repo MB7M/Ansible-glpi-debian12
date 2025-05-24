@@ -1,0 +1,59 @@
+---
+- name: Configurer MariaDB
+  hosts: glpi
+  become: true
+
+  vars:
+    mysql_root_password: "héhé"
+
+  tasks:
+
+    # Définir le mot de passe root MySQL en utilisant la connexion via socket (détection automatique des privilèges)
+    - name: Définir le mot de passe root MySQL
+      mysql_user:
+        login_unix_socket: /var/run/mysqld/mysqld.sock
+        name: root
+        password: "{{ mysql_root_password }}"
+        host_all: true
+        check_implicit_admin: yes
+        state: present
+
+    # Créer l’utilisateur MySQL 'mbits' pour GLPI
+    - name: Créer l’utilisateur MySQL 'mbits'
+      mysql_user:
+        login_user: root
+        login_password: "{{ mysql_root_password }}"
+        name: mbits
+        password: azerty
+        host: localhost
+        state: present
+
+    # Créer la base de données 'glpi'
+    - name: Créer la base de données 'glpi'
+      mysql_db:
+        login_user: root
+        login_password: "{{ mysql_root_password }}"
+        name: glpi
+        state: present
+
+    # Accorder les privilèges à 'mbits' sur 'glpi' pour les connexions locales
+    - name: Accorder les privilèges à 'mbits' sur la base 'glpi' (localhost)
+      mysql_user:
+        login_user: root
+        login_password: "{{ mysql_root_password }}"
+        name: mbits
+        password: azerty
+        host: localhost
+        priv: "glpi.*:ALL"
+        state: present
+
+    # Accorder les privilèges à 'mbits' pour les connexions à distance (depuis Ansible ou autre hôte)
+    - name: Accorder les privilèges à 'mbits' sur la base 'glpi' (connexion distante)
+      mysql_user:
+        login_user: root
+        login_password: "{{ mysql_root_password }}"
+        name: mbits
+        password: azerty
+        host: "%"
+        priv: "glpi.*:ALL"
+        state: present
