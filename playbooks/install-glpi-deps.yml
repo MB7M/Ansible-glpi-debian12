@@ -1,1 +1,31 @@
+---
+- name: Installation des packages nécessaires pour GLPI
+  hosts: glpi                           # Groupe défini dans /etc/ansible/hosts
+  become: true                          # Exécuter les tâches avec les privilèges root
+
+  tasks:
+
+    - name: Installation des paquets nécessaires  # Tâche d’installation
+      apt:
+        name:
+          - apache2                     # Serveur web
+          - mariadb-server              # Base de données
+          - php                         # Moteur PHP
+          - php-cli                     # Interface en ligne de commande
+          - php-mysql                   # Connexion PHP ↔ MySQL/MariaDB
+          - php-curl                    # Extension cURL pour PHP
+          - php-gd                      # Extension graphique
+          - php-intl                    # Gestion internationalisation
+          - php-ldap                    # Intégration annuaires LDAP
+          - php-mbstring                # Gestion des chaînes multibytes
+          - php-xml                     # Manipulation XML en PHP
+          - php-zip                     # Support des fichiers ZIP
+          - python3-pymysql             # Requis pour les modules Ansible mysql_*
+        state: present                  # S'assurer qu'ils sont installés
+        update_cache: yes              # Mettre à jour les index APT avant installation
+
+    - name: Redémarrage d’Apache pour appliquer les modifications
+      service:
+        name: apache2
+        state: restarted
 
