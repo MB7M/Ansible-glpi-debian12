@@ -1,0 +1,27 @@
+---
+- name: Configuration initiale de GLPI
+  hosts: glpi
+  become: true
+
+  vars:
+    glpi_db_host: "localhost"
+    glpi_db_port: "3306"
+    glpi_db_name: "glpi"
+    glpi_db_user: "mbits"
+    glpi_db_password: "azerty"
+    glpi_install_path: "/var/www/html"
+    mysql_root_password: "héhé"  # utilisé uniquement pour vérifier l'accès à la base
+
+  tasks:
+    # Vérification de la connexion à la base de données
+    - name: Vérifier la connexion à la base de données
+      mysql_db:
+        login_user: root
+        login_password: "{{ mysql_root_password }}"
+        name: "{{ glpi_db_name }}"
+
+    # Installation automatique de GLPI via la console CLI
+    - name: Lancer l’installation automatique de GLPI
+      command: php bin/console db:install -n -H {{ glpi_db_host }} -P {{ glpi_db_port }} -d {{ glpi_db_name }} -u {{ glpi_db_user }} -p {{ glpi_db_password }} --reconfigure --force
+      args:
+        chdir: "{{ glpi_install_path }}/glpi"
