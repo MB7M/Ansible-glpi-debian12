@@ -1,1 +1,3 @@
+[glpi]
+172.168.1.47 ansible_user=ansible
 
