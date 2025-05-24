@@ -60,11 +60,11 @@ Les étapes manuelles nécessaires à la mise en place de l’environnement sont
 
 Les playbooks ci-dessous sont exécutés depuis `SRV-ANSIBLE` pour installer et configurer automatiquement le serveur `SRV-GLPI` :
 
-- [`install-glpi-deps.yml`](playbooks/install-glpi-deps.yml) : installation d’Apache2, PHP 8.2 et extensions requises
-- [`mariadb-config.yml`](playbooks/mariadb-config.yml) : création de la base GLPI et de l’utilisateur SQL `mbits`
-- [`download-glpi.yml`](playbooks/download-glpi.yml) : téléchargement et extraction de GLPI
-- [`install-glpi-cli.yml`](playbooks/install-glpi-cli.yml) : installation de GLPI via `php bin/console`
-- [`glpi-ssl.yml`](playbooks/glpi-ssl.yml) : génération de certificat SSL auto-signé et configuration Apache2 HTTPS
+- [`01_install-glpi-deps.yml`](playbooks/01_install-glpi-deps.yml) : installation d’Apache2, PHP 8.2 et extensions requises
+- [`02_mariadb-config.yml`](playbooks/02_mariadb-config.yml) : création de la base GLPI et de l’utilisateur SQL `mbits`
+- [`03_download-glpi.yml`](playbooks/03_download-glpi.yml) : téléchargement et extraction de GLPI
+- [`04_install-glpi-cli.yml`](playbooks/04_install-glpi-cli.yml) : installation de GLPI via `php bin/console`
+- [`05_glpi-ssl.yml`](playbooks/05_glpi-ssl.yml) : génération de certificat SSL auto-signé et configuration Apache2 HTTPS
 
 ---
 
@@ -83,11 +83,11 @@ Ansible-glpi-debian12/
 │   └── hosts
 │
 ├── playbooks/
-│   ├── install-glpi-deps.yml
-│   ├── mariadb-config.yml
-│   ├── download-glpi.yml
-│   ├── install-glpi-cli.yml
-│   └── glpi-ssl.yml
+│   ├── 01_install-glpi-deps.yml
+│   ├── 02_mariadb-config.yml
+│   ├── 03_download-glpi.yml
+│   ├── 04_install-glpi-cli.yml
+│   └── 05_glpi-ssl.yml
 │
 ├── .gitignore
 └── README.md
