@@ -1,6 +1,6 @@
-# Déploiement automatisé de GLPI 10.0.15 avec Ansible – Cloud privé Proxmox VE
+# Déploiement automatisé de GLPI avec Ansible – Cloud privé Proxmox VE
 
-Ce projet propose une solution automatisée pour déployer **GLPI 10.0.15** sur **Debian 12**, à l’aide d’**Ansible**, dans un environnement virtualisé sous **Proxmox VE**.
+Ce projet propose une solution automatisée pour déployer **GLPI 10.0.14** sur **Debian 12**, à l’aide d’**Ansible**, dans un environnement virtualisé sous **Proxmox VE**.
 
 Chaque étape (installation, configuration, sécurisation HTTPS) est orchestrée par des **playbooks indépendants**.
 
