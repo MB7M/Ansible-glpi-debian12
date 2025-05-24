@@ -8,7 +8,7 @@ Chaque étape (installation, configuration, sécurisation HTTPS) est orchestrée
 
 ## Schéma d’architecture
 
-![Schéma réseau – Ansible + GLPI](captures/schema-ansible-glpi.png)
+![Schéma réseau – Ansible + GLPI](captures/schema-ansible-glpi1.png)
 
 ---
 
