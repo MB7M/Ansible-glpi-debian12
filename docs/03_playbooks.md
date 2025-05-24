@@ -22,7 +22,7 @@ Il redémarre ensuite Apache2 pour appliquer les modifications.
 
 ### Fichier source
 
-> Le fichier source est disponible ici : [`install-glpi-deps.yml`](../playbooks/01_install-glpi-deps.yml)
+> Le fichier source est disponible ici : [`playbooks/01_install-glpi-deps.yml`](../playbooks/01_install-glpi-deps.yml)
 
 ---
 
@@ -54,7 +54,7 @@ Il effectue les actions suivantes :
 
 ### Fichier source
 
-> Le fichier source est disponible ici : [`playbooks/mariadb-config.yml`](../playbooks/02_mariadb-config.yml)
+> Le fichier source est disponible ici : [`playbooks/02_mariadb-config.yml`](../playbooks/02_mariadb-config.yml)
 
 ---
 
@@ -89,7 +89,7 @@ Les tâches effectuées sont :
 
 ### Fichier source
 
-> Le fichier source est disponible ici : [`playbooks/download-glpi.yml`](../playbooks/03_download-glpi.yml)
+> Le fichier source est disponible ici : [`playbooks/03_download-glpi.yml`](../playbooks/03_download-glpi.yml)
 
 ---
 
@@ -116,7 +116,7 @@ Les variables de connexion à la base sont définies au début du fichier pour f
 
 ### Fichier source
 
-> Le fichier source est disponible ici : [`playbooks/install-glpi-cli.yml`](../playbooks/04_install-glpi-cli.yml)
+> Le fichier source est disponible ici : [`playbooks/04_install-glpi-cli.yml`](../playbooks/04_install-glpi-cli.yml)
 
 ---
 
@@ -159,7 +159,7 @@ Il effectue les opérations suivantes :
 
 ### Fichier source
 
-> Le fichier source est disponible ici : [`playbooks/glpi-ssl.yml`](../playbooks/05_glpi-ssl.yml)
+> Le fichier source est disponible ici : [`playbooks/05_glpi-ssl.yml`](../playbooks/05_glpi-ssl.yml)
 
 ---
 
