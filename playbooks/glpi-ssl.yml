@@ -1,0 +1,62 @@
+---
+- name: Générer un certificat SSL auto-signé et configurer Apache pour GLPI
+  hosts: glpi
+  become: true
+
+  vars:
+    ssl_cert_path: /etc/ssl/certs/certificat_glpi.crt
+    ssl_key_path: /etc/ssl/private/cle_glpi.key
+    ssl_csr_path: /etc/ssl/certs/certificat_glpi.csr
+
+  tasks:
+    - name: Créer les répertoires SSL
+      file:
+        path: "{{ item }}"
+        state: directory
+        mode: '0755'
+      with_items:
+        - /etc/ssl/certs
+        - /etc/ssl/private
+
+    - name: Générer la clé privée SSL
+      community.crypto.openssl_privatekey:
+        path: "{{ ssl_key_path }}"
+        size: 2048
+
+    - name: Générer le CSR (Certificate Signing Request)
+      community.crypto.openssl_csr:
+        path: "{{ ssl_csr_path }}"
+        privatekey_path: "{{ ssl_key_path }}"
+        common_name: glpi.mbits.lan
+        country_name: FR
+        organization_name: mbits
+        organizational_unit_name: IT
+        state_or_province_name: Hauts-de-France
+        locality_name: Lille
+
+    - name: Générer un certificat SSL auto-signé
+      community.crypto.x509_certificate:
+        path: "{{ ssl_cert_path }}"
+        privatekey_path: "{{ ssl_key_path }}"
+        csr_path: "{{ ssl_csr_path }}"
+        provider: selfsigned
+
+    - name: Installer la librairie Python nécessaire
+      apt:
+        name: python3-cryptography
+        state: present
+        update_cache: yes
+
+    - name: Copier la configuration Apache GLPI SSL
+      copy:
+        src: /home/ansible/glpi-ssl.conf
+        dest: /etc/apache2/sites-available/glpi-ssl.conf
+        mode: '0644'
+
+    - name: Activer le virtual host GLPI SSL
+      command: a2ensite glpi-ssl.conf
+
+    - name: Recharger Apache pour appliquer la conf SSL
+      service:
+        name: apache2
+        state: restarted
