@@ -105,3 +105,80 @@ Les tâches effectuées sont :
 
 ---
 
+## Playbook `install-glpi-cli.yml`
+
+### Objectif
+
+Ce playbook permet de réaliser l'installation silencieuse de GLPI via la ligne de commande (`bin/console`)  
+Il vérifie d'abord la connexion à la base de données MariaDB, puis exécute l'installation CLI.
+
+Les variables de connexion à la base sont définies au début du fichier pour faciliter la gestion et la lisibilité.
+
+### Fichier source
+
+> Le fichier source est disponible ici : [`playbooks/install-glpi-cli.yml`](../playbooks/install-glpi-cli.yml)
+
+---
+
+### Aperçu du playbook
+
+![playbook_install_glpi_cli_1](/captures/playbook_install_glpi_cli_all.png)  
+
+---
+
+### Résultat de l’exécution
+
+![playbook_install_glpi_cli_ok](/captures/playbook_install_glpi_cli_ok.png)
+
+---
+
+## Playbook `glpi-ssl.yml`
+
+### Objectif
+
+Ce playbook génère un certificat SSL auto-signé et configure Apache2 pour sécuriser l’accès à GLPI via HTTPS.  
+Il effectue les opérations suivantes :
+
+- Création des répertoires `/etc/ssl/certs` et `/etc/ssl/private`
+- Génération d’une clé privée et d’un CSR (Certificate Signing Request)
+- Génération d’un certificat SSL auto-signé
+- Installation de la librairie Python requise (`python3-cryptography`)
+- Copie d’un fichier de configuration Apache (`glpi-ssl.conf`) préparé en amont
+- Activation du site via `a2ensite` et redémarrage d’Apache
+
+> ⚠️ Le fichier `/home/ansible/glpi-ssl.conf` **doit être préparé manuellement** avec les bons chemins vers les certificats avant exécution du playbook.
+
+>  Assurez-vous que le service Apache2 est actif et opérationnel avant l’exécution.
+
+> L’accès HTTPS ne sera pleinement fonctionnel qu’après avoir :
+> - ouvert GLPI via navigateur depuis la machine cliente
+> - accepté manuellement le certificat (auto-signé)
+> - ajouté l’URL avec le CN utilisé (`glpi.mbits.lan`) dans les hôtes de confiance (par exemple dans les certificats autorisés sous Windows)
+
+---
+
+### Fichier source
+
+> Le fichier source est disponible ici : [`playbooks/glpi-ssl.yml`](../playbooks/glpi-ssl.yml)
+
+---
+
+### Aperçu du playbook
+
+![playbook_glpi_ssl_1](/captures/playbook_glpi_ssl_1.png)  
+![playbook_glpi_ssl_2](/captures/playbook_glpi_ssl_2.png)
+
+---
+
+### Résultat de l’exécution
+
+![playbook_glpi_ssl_ok](/captures/playbook_glpi_ssl_ok.png)
+
+---
+
+### Vérification côté navigateur
+
+![certificas_ssl](/captures/certificas_ssl.png)  
+![glpi_https_ok](/captures/glpi_https_ok.png)
+
+
