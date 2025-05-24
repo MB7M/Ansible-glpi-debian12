@@ -1,0 +1,41 @@
+---
+- name: Télécharger et décompresser GLPI dans /var/www/html
+  hosts: glpi
+  become: true
+
+  tasks:
+    # Créer le dossier temporaire
+    - name: Créer un dossier /tmp/glpi
+      file:
+        path: /tmp/glpi
+        state: directory
+        mode: '0755'     # mode = définit les droits d’accès (lecture/écriture/exécution pour le propriétaire)
+
+    # Télécharger l’archive GLPI depuis GitHub
+    - name: Télécharger l’archive GLPI depuis GitHub
+      get_url:
+        url: https://github.com/glpi-project/glpi/releases/download/10.0.14/glpi-10.0.14.tgz
+        dest: /tmp/glpi/glpi.tgz
+        mode: '0644'     # (lecture/écriture pour le propriétaire, lecture pour les autres)
+
+    # Extraire l’archive dans /var/www/html
+    - name: Extraire GLPI dans /var/www/html
+      unarchive:
+        src: /tmp/glpi/glpi.tgz
+        dest: /var/www/html/
+        remote_src: yes
+
+    # Supprimer l’archive après extraction
+    - name: Supprimer l’archive GLPI .tgz
+      file:
+        path: /tmp/glpi/glpi.tgz
+        state: absent
+
+    # Appliquer les droits www-data sur GLPI
+    - name: Appliquer les droits www-data sur /var/www/html/glpi
+      file:
+        path: /var/www/html/glpi
+        state: directory
+        recurse: yes
+        owner: www-data
+        group: www-data
