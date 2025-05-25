@@ -16,8 +16,13 @@ Il redémarre ensuite Apache2 pour appliquer les modifications.
 
 > **Remarque** : tous les playbooks sont regroupés dans un dossier dédié `glpi-ansible-debian12/` dans le home de l’utilisateur `ansible`.
 
-> Le fichier [`/ansible/hosts`](../inventory/hosts) doit obligatoirement spécifier l’utilisateur `ansible` avec la directive `ansible_user=ansible` pour que l’exécution soit fonctionnelle.
+> Le fichier [`etc/ansible/hosts`](../inventory/hosts) doit obligatoirement spécifier l’utilisateur `ansible` avec la directive `ansible_user=ansible` pour que l’exécution soit fonctionnelle.
 
+La commande d’exécution à utiliser est la suivante (en adaptant le nom du fichier selon le playbook concerné) :
+
+```bash
+ansible-playbook nomduplaybook.yml -u ansible (utilisateur)
+```
 ---
 
 ### Fichier source
