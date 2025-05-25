@@ -54,6 +54,8 @@ echo "deb [signed-by=/usr/share/keyrings/ansible-archive-keyring.gpg] http://ppa
 
 ```bash
 sudo apt update
+```
+```bash
 sudo apt install -y ansible python3-cryptography python3-pymysql
 ```
 
@@ -97,7 +99,8 @@ sudo nano /etc/ansible/hosts
 ```
 Contenu :
 ```ini
-[glpi] 172.168.1.47 ansible_user=wilder
+[glpi]
+172.168.1.47 ansible_user=wilder
 ```
 
 ![captures](/captures/inventaire_hosts_glpi.png)
@@ -121,8 +124,8 @@ sudo ansible glpi -m ping -u wilder -k
 - `-k` : demande de mot de passe SSH
     
 
-⚠️ Le contrôleur Ansible (`SRV-ANSIBLE`) doit **s’être connecté au préalable une première fois en SSH à `wilder@172.168.1.47`**,  
-afin que la clé du serveur distant (`SRV-GLPI`) soit enregistrée dans `known_hosts`.  
-L’utilisateur `wilder` doit également disposer des droits `sudo` sur la machine cible.
+⚠️ Le contrôleur Ansible (SRV-ANSIBLE) doit s’être connecté au préalable une première fois à wilder@172.168.1.47 en SSH, afin d’ajouter automatiquement l’empreinte du serveur distant dans ~/.ssh/known_hosts.  
+
+L’utilisateur `wilder` doit également disposer des droits `sudo` sur la machine cible, sinon certains modules Ansible échoueront.
 
 ![captures](/captures/ping_noeud_ok.png)
