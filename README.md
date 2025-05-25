@@ -78,6 +78,7 @@ Ansible-glpi-debian12/
 ├── docs/
 │   ├── 01_installation_configuration_ansible.md
 │   ├── 02_configuration_utilisateur_ssh.md
+    ├── 03_playbooks.md
 │
 ├── inventory/
 │   └── hosts
