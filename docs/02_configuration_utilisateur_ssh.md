@@ -58,10 +58,12 @@ sudo -u ansible ssh-keygen -t ed25519
 
 ### 3. Créer l’utilisateur `ansible` à distance (SRV-GLPI) via Ansible
 
-
-Sur la machine distante, l’utilisateur `ansible` est créé via le module Ansible `user`, avec les privilèges sudo :
-
-
+Le module Python passlib doit être installé sur le contrôleur Ansible (SRV-ANSIBLE) pour que le filtre password_hash fonctionne.
+si non présent à installer avec :
+```bash
+sudo apt install python3-passlib
+```
+Sur la machine distante, l’utilisateur `ansible` est créé via le module Ansible `user`, avec les privilèges sudo :  
 ```bash
 
 sudo ansible glpi -m user -a "name=ansible state=present password={{ 'héhé'|password_hash('sha512') }} groups=sudo shell=/bin/bash createhome=yes" -u wilder -b -k -K
