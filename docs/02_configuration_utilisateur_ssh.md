@@ -84,7 +84,12 @@ sudo ansible glpi -m user -a "name=ansible state=present password={{ 'héhé'|pa
  
 > - options : -k demande le mdp ssh, -K le mdp sudo et -b exécute la tâche avec des privilèges.
 
-  
+⚠️ Pour que l’exécution des playbooks fonctionne sans interruption, l’utilisateur ansible sur la machine distante (SRV-GLPI) doit être autorisé à utiliser sudo sans mot de passe.
+Ajouter cette directive dans /etc/sudoers via visudo :
+
+```sql
+ansible ALL=(ALL) NOPASSWD: ALL
+``` 
 ---
 
 ### 4. Vérifier la création du compte à distance
