@@ -4,7 +4,7 @@
   become: true
 
   vars:
-    mysql_root_password: "héhé"
+    mysql_root_password: "héhé" # ici utilisé pour le test mais le mdp root MySQL doit être suffisamment complexe pour éviter les erreurs silencieuses liées aux politiques de sécurité de MariaDB.
 
   tasks:
 
