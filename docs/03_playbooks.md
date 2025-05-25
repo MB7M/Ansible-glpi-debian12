@@ -151,7 +151,27 @@ Il effectue les opérations suivantes :
 - Copie d’un fichier de configuration Apache (`glpi-ssl.conf`) préparé en amont
 - Activation du site via `a2ensite` et redémarrage d’Apache
 
-> ⚠️ Le fichier `/home/ansible/glpi-ssl.conf` **doit être préparé manuellement** avec les bons chemins vers les certificats avant exécution du playbook.
+> ⚠️ Le fichier `/home/ansible/glpi-ssl.conf` **doit être préparé manuellement** avec les bons chemins vers les certificats avant exécution du playbook :
+
+```apache
+<VirtualHost *:443>
+    ServerName glpi.mbits.lan
+    DocumentRoot /var/www/html/glpi
+
+    SSLEngine on
+    SSLCertificateFile /etc/ssl/certs/certificat_glpi.crt
+    SSLCertificateKeyFile /etc/ssl/private/cle_glpi.key
+
+    <Directory /var/www/html/glpi>
+        Options Indexes FollowSymLinks
+        AllowOverride All
+        Require all granted
+    </Directory>
+
+    ErrorLog ${APACHE_LOG_DIR}/glpi_error.log
+    CustomLog ${APACHE_LOG_DIR}/glpi_access.log combined
+</VirtualHost>
+```
 
 >   Ce playbook suppose que le module Apache ssl  a déjà été activé manuellement. Si ce n’est pas le cas, exécute la commande suivante sur le serveur GLPI avant lancement :
 
