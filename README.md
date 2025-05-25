@@ -53,6 +53,7 @@ Les étapes manuelles nécessaires à la mise en place de l’environnement sont
 
 - [`01_installation_configuration_ansible.md`](docs/01_installation_configuration_ansible.md) : installation d’Ansible, configuration initiale 
 - [`02_configuration_utilisateur_ssh.md`](docs/02_configuration_utilisateur_ssh.md) : création de l’utilisateur distant `ansible` et mise en place de l’authentification SSH sans mot de passe
+- [`03_playbooks.md`](docs/03_playbooks.md) : exécution des playbooks avec captures, commentaires et recommandations pour assurer le bon fonctionnement du déploiement
 
 ---
 
