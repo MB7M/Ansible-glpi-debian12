@@ -24,7 +24,8 @@ Sur la machine de gestion (SRV-ANSIBLE), l’utilisateur est créé manuellement
 
 ```bash
 sudo adduser ansible
-
+```
+```bash
 sudo usermod -aG sudo ansible
 ```
 
