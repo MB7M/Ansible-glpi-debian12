@@ -153,8 +153,11 @@ Il effectue les opérations suivantes :
 
 > ⚠️ Le fichier `/home/ansible/glpi-ssl.conf` **doit être préparé manuellement** avec les bons chemins vers les certificats avant exécution du playbook.
 
->  Assurez-vous que le service Apache2 est actif et opérationnel avant l’exécution.
+>   Ce playbook suppose que le module Apache ssl  a déjà été activé manuellement. Si ce n’est pas le cas, exécute la commande suivante sur le serveur GLPI avant lancement :
 
+```bash
+a2enmod ssl && systemctl restart apache2
+```
 > L’accès HTTPS ne sera pleinement fonctionnel qu’après avoir :
 > - ouvert GLPI via navigateur depuis la machine cliente
 > - accepté manuellement le certificat (auto-signé)
