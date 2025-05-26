@@ -99,7 +99,7 @@ Ansible-glpi-debian12/
 
 ## Objectifs atteints
 
-- Déploiement 100 % automatisé de GLPI 10.0.15
+- Déploiement 100 % automatisé de GLPI 10.0.14
 - Mise en place sécurisée d’un serveur Apache2, MariaDB, PHP 8.2
 - Installation CLI sans interaction
 - Génération et intégration d’un certificat SSL auto-signé
